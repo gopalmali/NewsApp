@@ -9,13 +9,24 @@ function repload(){
     curSelectedNav=null;
 }
 
-async function fetchNews(query){
-    const res = await fetch(`${url}${query}&apiKey=${API_KEY}`);
-    const data=await res.json();
-    // console.log(data);
-    bindData(data.articles);
-
+function fetchNews(query){
+      fetch(`${url}${query}&apiKey=${API_KEY}`)
+      .then(response=>response.json())
+      .then(data=>{
+        bindData(data.articles);
+      })
+      .catch(error=>console.error('Error fetching news:', error));
+        // console.log(data);
+        
 }
+
+// async function fetchNews(query){
+//     const res = await fetch(`${url}${query}&apiKey=${API_KEY}`);
+//     const data=await res.json();
+//     // console.log(data);
+//     bindData(data.articles);
+
+// }
 
 function bindData(articles){
     const cardsContainer = document.getElementById("cards-container");
